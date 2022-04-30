@@ -18,7 +18,6 @@ function createDreamTeam(members) {
     const sortedMemebers = members.sort();
     let res = "";
     sortedMemebers.forEach(member => {
-      
       if((typeof member === "string") ){
         res += member[0].toUpperCase();
       }
