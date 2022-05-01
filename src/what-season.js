@@ -40,6 +40,8 @@ function getSeason(date) {
         case 9:
         case 10:
           return "autumn";
+        default:
+          throw new Error("Invalid date!")
       }
     }
   }catch{
