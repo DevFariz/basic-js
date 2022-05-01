@@ -23,6 +23,12 @@ function repeater( str, options ) {
         res += `${str}+`
       }
       res = res.slice(0, res.length - 1);
+    }else{
+      for(let i = 0; i < options.repeatTimes; i++){
+        res += `${str}${options.separator}`
+      }
+      let x = res.lastIndexOf(options.separator)
+      res = res.slice(0, x);
     }
     
     return res;
