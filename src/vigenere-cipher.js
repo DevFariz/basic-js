@@ -29,19 +29,54 @@ class VigenereCipheringMachine {
     if(message === undefined || key === undefined){
       throw new Error("Incorrect arguments!")
     }
-    let text = "";
+    let resText = "", upperKey = key.toUpperCase();
+    
+    while(upperKey.length < message.length){
+      upperKey += key.toUpperCase();
+    }
 
+    let x = 0;
+    for(let i = 0; i < message.length; i++){
+      if(!message[i].match(/[a-z]/i)){
+        resText += message[i];
+      }else{
+        resText += String.fromCharCode(((message[i].toUpperCase().charCodeAt(0) + upperKey[x++].charCodeAt(0)) % 26) + 65)
+      }
+    }
 
-    return text;
+    if(this.isDirect){
+      return resText
+    }else{
+      return resText.split("").reverse().join("")
+    }
+
   }
+
   decrypt(encryptedMessage, key) {
     if(encryptedMessage === undefined || key === undefined){
       throw new Error("Incorrect arguments!")
     }
-    let text = "";
 
+    let resText = "", upperKey = key.toUpperCase();
 
-    return text;
+    while(upperKey.length < encryptedMessage.length){
+      upperKey += key.toUpperCase();
+    }
+
+    let x = 0;
+    for(let i = 0; i < encryptedMessage.length; i++){
+      if(!encryptedMessage[i].match(/[a-z]/i)){
+        resText += encryptedMessage[i];
+      }else{
+        resText += String.fromCharCode(((encryptedMessage[i].toUpperCase().charCodeAt(0) - upperKey[x++].charCodeAt(0) + 26) % 26) + 65)
+      }
+    }
+
+    if(this.isDirect){
+      return resText
+    }else{
+      return resText.split("").reverse().join("")
+    }
   }
 }
 
