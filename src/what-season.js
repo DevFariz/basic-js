@@ -17,6 +17,14 @@ function getSeason(date) {
   if (date === undefined) {
     return "Unable to determine the time of year!";
   } 
+
+
+  try {
+    date.toUTCString();
+  } catch {
+    throw new Error("Invalid date!");
+  }
+
   try{
      if (Object.prototype.toString.call(date) !== "[object Date]" && !(date instanceof Date)) {
       throw new Error("Invalid date!")
